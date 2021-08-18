@@ -1,10 +1,17 @@
+import {
+    locService
+} from './loc.service.js'
+
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    addClickListener,
+    sendCurrLoc
 }
 
 var gMap;
+var gCurrLoc = {};
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap');
@@ -23,7 +30,49 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
         })
 }
 
+
+function addClickListener() {
+    const myLatlng = {
+        lat: -25.363,
+        lng: 131.044
+    };
+    // Create the initial InfoWindow.
+    let infoWindow = new google.maps.InfoWindow({
+        content: "Click the map to get Lat/Lng!",
+        position: myLatlng,
+    });
+    infoWindow.open(gMap);
+    //Add map click listener.
+    gMap.addListener("click", (mapsMouseEvent) => {
+        gCurrLoc = {
+            lat: mapsMouseEvent.latLng.lat(),
+            lng: mapsMouseEvent.latLng.lng()
+        }
+        // Close the current InfoWindow.
+        infoWindow.close();
+        // Create a new InfoWindow.
+        infoWindow = new google.maps.InfoWindow({
+            position: mapsMouseEvent.latLng,
+        });
+        infoWindow.setContent(
+            JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+        );
+        infoWindow.open(gMap);
+    });
+
+}
+
+
+function sendCurrLoc() {
+    // bring the loc obj array
+    console.log(gCurrLoc);
+    if (gCurrLoc === {}) return;
+    locService.addNewLoc(gCurrLoc);
+    addMarker(gCurrLoc)
+}
+
 function addMarker(loc) {
+    console.log(loc);
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,

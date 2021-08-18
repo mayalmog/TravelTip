@@ -1,18 +1,26 @@
-import { locService } from './services/loc.service.js'
-import { mapService } from './services/map.service.js'
+import {
+    locService
+} from './services/loc.service.js'
+
+import {
+    mapService
+} from './services/map.service.js'
 
 window.onload = onInit;
 window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
+window.onAddLoc = onAddLoc;
 
 function onInit() {
     mapService.initMap()
         .then(() => {
             console.log('Map is ready');
+            mapService.addClickListener();
         })
         .catch(() => console.log('Error: cannot init map'));
+
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -23,9 +31,19 @@ function getPosition() {
     })
 }
 
+
+function onAddLoc() {
+    //check if map not clicked yet
+    mapService.sendCurrLoc();
+}
+
 function onAddMarker() {
     console.log('Adding a marker');
-    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+    // var {lat, lang} = func that get lat lang from click
+    mapService.addMarker({
+        lat: 32.0749831,
+        lng: 34.9120554
+    });
 }
 
 function onGetLocs() {
@@ -47,6 +65,7 @@ function onGetUserPos() {
             console.log('err!!!', err);
         })
 }
+
 function onPanTo() {
     console.log('Panning the Map');
     mapService.panTo(35.6895, 139.6917);

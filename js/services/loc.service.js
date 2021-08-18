@@ -1,28 +1,27 @@
+import {
+    utilService
+} from './util.service.js'
+
 export const locService = {
-    getLocs
+    getLocs, //remove?
+    addNewLoc
 }
 
 
-const locs = [{
-        name: 'Greatplace',
-        lat: 32.047104,
-        lng: 34.832384
-    },
-    {
-        name: 'Neveragain',
-        lat: 32.047201,
-        lng: 34.832581
-    }
-]
+var locs = [];
 
-var LocationService = {
-    id: 1,
-    locName: 1,
-    lat: 1,
-    lng: 1,
-    weather: 1,
-    createdAt: 1,
-    updatedAt: 1
+function addNewLoc(loc) {
+    locs.push({
+        id: utilService.makeId(5),
+        locName: 'temp name',
+        lat: loc.lat,
+        lng: loc.lng,
+        weather: 'tbd',
+        createdAt: Date().slice(0, 24),
+        updatedAt: 'tbd'
+    })
+
+    console.log(locs);
 }
 
 function getLocs() {
