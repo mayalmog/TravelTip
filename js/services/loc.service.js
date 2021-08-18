@@ -3,10 +3,27 @@ export const locService = {
 }
 
 
-const locs = [
-    { name: 'Greatplace', lat: 32.047104, lng: 34.832384 }, 
-    { name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
+const locs = [{
+        name: 'Greatplace',
+        lat: 32.047104,
+        lng: 34.832384
+    },
+    {
+        name: 'Neveragain',
+        lat: 32.047201,
+        lng: 34.832581
+    }
 ]
+
+var LocationService = {
+    id,
+    name,
+    lat,
+    lng,
+    weather,
+    createdAt,
+    updatedAt
+}
 
 function getLocs() {
     return new Promise((resolve, reject) => {
@@ -15,5 +32,3 @@ function getLocs() {
         }, 2000)
     });
 }
-
-

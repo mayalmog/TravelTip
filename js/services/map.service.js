@@ -5,7 +5,6 @@ export const mapService = {
 }
 
 var gMap;
-const APY_KEY = 'AIzaSyCFlITp80vTDJKwz - aS - ohXgNh - s7n8RaU';
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap');
@@ -42,7 +41,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = ''; //TODO: Enter your API Key
+    const API_KEY = 'AIzaSyCFlITp80vTDJKwz-aS-ohXgNh-s7n8RaU';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
