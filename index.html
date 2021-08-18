@@ -9,35 +9,53 @@
 </head>
 
 <body>
-    <h1>TravelTip</h1>
-    <button class="btn-add-loc" onclick="onAddLoc()">Add To My Locations</button>
-    <div id="map" style="width: 450px; height: 450px;"></div>
-    <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Specific Location</button>
-    <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-    <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+    <div class="header-container flex align-center space-between">
+        <h1>TravelTip</h1>
 
-    <p>You are at: <span class="user-pos"></span></p>
-    <p>Locations: <span class="locs"></span></p>
-
-    <div class="locations-container">
-        <table>
-            <thead>
-                <th>Actions</th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>Weather</th>
-                <th>Creation Date</th>
-                <th>Last Update</th>
-            </thead>
-            <tbody class="my-locations-tb">
-
-            </tbody>
-        </table>
+        <div class="search-container">
+            <input type="search" name="search-bar" id="search-bar">
+            <button class="btn-go-search" onclick="onSearchLoc()">GO</button>
+            <button onclick="onGetUserPos()" class="btn-user-pos">My Location</button>
+        </div>
     </div>
 
+    <div class="copy-container flex align-center space-between">
+        <p>Location: <span>London</span></p>
+        <button class="btn-copy" onclick="on">Copy Location</button>
+    </div>
+
+    <div class="info-container">
+        <div class="weather-container">
+            <h2>Weather</h2>
+        </div>
+
+        <div class="locations-container">
+            <table class="locations-table">
+                <thead>
+                    <th>Actions</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Weather</th>
+                    <th>Creation Date</th>
+                    <th>Last Update</th>
+                </thead>
+                <tbody class="my-locations-tb">
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="map-container">
+            <button class="btn-add-loc" onclick="onAddLoc()">Add To My Locations</button>
+
+            <div id="map" style="width: 450px; height: 450px;"></div>
+        </div>
+    </div>
+    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
+
+    <script src="lib/axios.js"></script>
     <script type="module" src="js/app.controller.js"></script>
 </body>
 

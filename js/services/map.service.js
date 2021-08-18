@@ -7,11 +7,14 @@ export const mapService = {
     addMarker,
     panTo,
     addClickListener,
-    sendCurrLoc
+    sendCurrLoc,
+    getConvAddress,
+    setCurrLoc
 }
 
 var gMap;
 var gCurrLoc = {};
+const API_KEY = 'AIzaSyCFlITp80vTDJKwz-aS-ohXgNh-s7n8RaU';
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap');
@@ -63,16 +66,13 @@ function addClickListener() {
 }
 
 
-function sendCurrLoc() {
-    // bring the loc obj array
-    console.log(gCurrLoc);
-    if (gCurrLoc === {}) return;
-    locService.addNewLoc(gCurrLoc);
-    addMarker(gCurrLoc)
+function sendCurrLoc(locName) {
+    // if (!Object.keys(gCurrLoc).length) 
+    locService.addNewLoc(gCurrLoc, locName);
+    addMarker(gCurrLoc);
 }
 
 function addMarker(loc) {
-    console.log(loc);
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
@@ -90,7 +90,6 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyCFlITp80vTDJKwz-aS-ohXgNh-s7n8RaU';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -100,4 +99,16 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve;
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+
+function getConvAddress(address) {
+    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`)
+        .then(res => res.data.results[0].geometry.location);
+}
+
+function setCurrLoc(lat, lng) {
+    gCurrLoc = {
+        lat,
+        lng
+    }
 }
