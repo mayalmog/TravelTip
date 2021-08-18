@@ -16,13 +16,13 @@ const locs = [{
 ]
 
 var LocationService = {
-    id,
-    name,
-    lat,
-    lng,
-    weather,
-    createdAt,
-    updatedAt
+    id: 1,
+    locName: 1,
+    lat: 1,
+    lng: 1,
+    weather: 1,
+    createdAt: 1,
+    updatedAt: 1
 }
 
 function getLocs() {
