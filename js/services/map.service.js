@@ -1,5 +1,3 @@
-
-
 export const mapService = {
     initMap,
     addMarker,
@@ -7,6 +5,7 @@ export const mapService = {
 }
 
 var gMap;
+const APY_KEY = 'AIzaSyCFlITp80vTDJKwz - aS - ohXgNh - s7n8RaU';
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap');
@@ -15,9 +14,12 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
+                    center: {
+                        lat,
+                        lng
+                    },
+                    zoom: 15
+                })
             console.log('Map!', gMap);
         })
 }
