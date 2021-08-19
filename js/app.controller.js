@@ -14,14 +14,17 @@ window.onGetUserPos = onGetUserPos;
 window.onAddLoc = onAddLoc;
 window.onDelete = onDelete;
 window.onSearchLoc = onSearchLoc;
+window.onCopyLoc = onCopyLoc;
 
 function onInit() {
     mapService.initMap()
         .then(() => {
             console.log('Map is ready');
             mapService.addClickListener();
+            checkIfLink()
         })
         .catch(() => console.log('Error: cannot init map'));
+
 
 }
 
@@ -123,3 +126,22 @@ function onSearchLoc() {
             onAddLoc();
         })
 }
+
+function onCopyLoc() {
+    var loc = mapService.getCurrLoc();
+    // console.log(loc);
+    const strHTML = `https://mayalmog.github.io/TravelTip/?lat=${loc.lat}&lng=${loc.lng}`;
+    alert(strHTML);
+}
+
+function checkIfLink() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('lat') && params.has('lng')) {
+        var lat = params.get('lat')
+        var lng = params.get('lng')
+        onPanTo(lat, lng);
+    } else {
+        return
+    }
+}
+

@@ -9,7 +9,8 @@ export const mapService = {
     addClickListener,
     sendCurrLoc,
     getConvAddress,
-    setCurrLoc
+    setCurrLoc,
+    getCurrLoc
 }
 
 var gMap;
@@ -23,12 +24,12 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: {
-                        lat,
-                        lng
-                    },
-                    zoom: 15
-                })
+                center: {
+                    lat,
+                    lng
+                },
+                zoom: 15
+            })
             console.log('Map!', gMap);
         })
 }
@@ -111,4 +112,8 @@ function setCurrLoc(lat, lng) {
         lat,
         lng
     }
+}
+
+function getCurrLoc() {
+    return gCurrLoc;
 }
